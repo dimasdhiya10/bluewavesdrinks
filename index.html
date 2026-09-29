@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueWave Drinks - Kesegaran Premium</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#0284c7', // Sky Blue Premium
+                            darkblue: '#0f172a', // Deep Navy Black
+                            electric: '#38bdf8', // Light Electric Blue
+                            black: '#090d16', // Pure Charcoal Black
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for blue vibe */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0284c7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #38bdf8;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        .glass-nav {
+            background: rgba(9, 13, 22, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-brand-black text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-brand-blue selection:text-white">
+
+    <!-- HEADER & NAVBAR -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300" id="mainHeader">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- BRAND LOGO -->
+                <a href="#beranda" class="flex items-center space-x-3 group">
+                    <div class="w-11 h-11 bg-gradient-to-tr from-blue-700 via-brand-blue to-brand-electric rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/30 group-hover:scale-105 transition-transform duration-300">
+                        <!-- Custom SVG Logo: Drink Cup + Wave Wave -->
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L5.6 15.12a2 2 0 01-1.022-.547l-1.12-1.12a2 2 0 010-2.828l1.12-1.12a2 2 0 011.022-.547l2.387-.477a6 6 0 003.86-.517l.318-.158a6 6 0 013.86-.517l2.387.477a2 2 0 011.022.547l1.12 1.12a2 2 0 010 2.828l-1.12 1.12z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 8l1.5-4h9L18 8M9 21h6a2 2 0 002-2V8H7v11a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-wide text-white block leading-tight">BLUE<span class="text-brand-electric">WAVE</span></span>
+                        <span class="text-[10px] text-blue-300 uppercase tracking-widest font-semibold block">Crafted Drinks</span>
+                    </div>
+                </a>
+
+                <!-- DESKTOP NAVIGATION LINKS -->
+                <nav class="hidden md:flex items-center space-x-1 bg-brand-darkblue/60 p-1.5 rounded-full border border-blue-500/20">
+                    <a href="#beranda" class="nav-link px-5 py-2 rounded-full text-sm font-medium text-white bg-brand-blue shadow-md transition-all">Beranda</a>
+                    <a href="#menu" class="nav-link px-5 py-2 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all">Menu</a>
+                    <a href="#alamat" class="nav-link px-5 py-2 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all">Alamat</a>
+                    <a href="#kontak" class="nav-link px-5 py-2 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-all">Kontak</a>
+                </nav>
+
+                <!-- RIGHT ACTION: CART BUTTON & MOBILE TOGGLE -->
+                <div class="flex items-center space-x-3">
+                    <!-- Cart Button -->
+                    <button id="cartBtn" class="relative p-2.5 rounded-xl bg-blue-950/80 border border-blue-500/30 text-brand-electric hover:bg-brand-blue hover:text-white transition-all duration-300 focus:outline-none">
+                        <i class="fa-solid fa-cart-shopping text-lg"></i>
+                        <span id="cartBadge" class="absolute -top-1.5 -right-1.5 bg-brand-electric text-brand-black text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center scale-0 transition-transform duration-300">0</span>
+                    </button>
+
+                    <!-- Mobile Menu Toggle Button -->
+                    <button id="mobileMenuBtn" class="md:hidden p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-lg" id="menuIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE NAVIGATION MENU -->
+        <div id="mobileMenu" class="hidden md:hidden bg-brand-darkblue/95 border-b border-blue-500/20 px-4 pt-2 pb-6 space-y-2">
+            <a href="#beranda" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-semibold text-white bg-brand-blue">Beranda</a>
+            <a href="#menu" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-slate-300 hover:bg-slate-800 hover:text-white">Menu</a>
+            <a href="#alamat" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-slate-300 hover:bg-slate-800 hover:text-white">Alamat</a>
+            <a href="#kontak" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-slate-300 hover:bg-slate-800 hover:text-white">Kontak</a>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-20">
+
+        <!-- SECTION 1: BERANDA (HERO & ABOUT) -->
+        <section id="beranda" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-16 px-4">
+            <!-- Background Decorative Glows -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-blue/20 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="absolute bottom-10 right-10 w-72 h-72 bg-brand-electric/15 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+                
+                <!-- Left Hero Text -->
+                <div class="space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-blue-950/80 border border-brand-electric/30 text-brand-electric text-xs font-semibold uppercase tracking-wider">
+                        <span class="w-2 h-2 rounded-full bg-brand-electric animate-ping"></span>
+                        <span>Project Website TKJ - Toko Minuman Modern</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
+                        Sensasi Kesegaran <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric via-blue-400 to-white">Dingin & Premium</span> Setiap Saat.
+                    </h1>
+
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        Selamat datang di <strong class="text-white">BlueWave Drinks</strong>! Platform pemesanan minuman kekinian dengan rasa otentik, racikan bahan berkualitas tinggi, dan pelayanan super cepat. 
+                    </p>
+
+                    <!-- Web Definition Box (Siswa TKJ context) -->
+                    <div class="glass-card p-5 rounded-2xl text-left border-l-4 border-l-brand-electric space-y-2">
+                        <div class="flex items-center space-x-2 text-brand-electric font-semibold text-sm">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span>Tentang Website Ini</span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            Website ini merupakan karya interaktif berbasis web responsive yang dirancang oleh siswa jurusan <strong>Teknik Komputer dan Jaringan (TKJ)</strong>. Mengintegrasikan antarmuka modern dengan sistem pemesanan langsung untuk menghadirkan pengalaman digital terbaik bagi pelanggan.
+                        </p>
+                    </div>
+
+                    <!-- Call To Action Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#menu" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-blue to-blue-600 hover:from-blue-600 hover:to-brand-blue text-white font-bold text-center shadow-lg shadow-blue-600/30 hover:scale-105 transition-all duration-300">
+                            Lihat Menu Minuman <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#kontak" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold text-center transition-all duration-300">
+                            Hubungi Kami
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Hero Image / Graphics -->
+                <div class="relative flex justify-center">
+                    <div class="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden glass-card p-4 group">
+                        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80" 
+                             alt="BlueWave Signature Drink" 
+                             class="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.src='https://placehold.co/600x600/0f172a/38bdf8?text=BlueWave+Special+Drink'">
+                        
+                        <!-- Floating Badge 1 -->
+                        <div class="absolute top-8 left-8 glass-card px-4 py-2.5 rounded-2xl flex items-center space-x-3 shadow-xl">
+                            <div class="w-9 h-9 rounded-xl bg-blue-500/20 text-brand-electric flex items-center justify-center">
+                                <i class="fa-solid fa-snowflake text-lg"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-slate-400 font-semibold">Suhu Ringan</p>
+                                <p class="text-xs font-bold text-white">100% Segar & Dingin</p>
+                            </div>
+                        </div>
+
+                        <!-- Floating Badge 2 -->
+                        <div class="absolute bottom-8 right-8 glass-card px-4 py-2.5 rounded-2xl flex items-center space-x-3 shadow-xl">
+                            <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                                <i class="fa-solid fa-star text-lg"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] text-slate-400 font-semibold">Rating Pelanggan</p>
+                                <p class="text-xs font-bold text-white">4.9 / 5.0 (500+ Ulasan)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2: MENU PRODUK -->
+        <section id="menu" class="py-20 px-4 bg-gradient-to-b from-brand-black via-brand-darkblue to-brand-black relative">
+            <div class="max-w-7xl mx-auto space-y-10">
+                
+                <!-- Section Header -->
+                <div class="text-center space-y-3 max-w-2xl mx-auto">
+                    <span class="text-brand-electric text-sm font-bold uppercase tracking-widest">Katalog Produk</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Pilihan Minuman Favorit</h2>
+                    <p class="text-slate-400 text-sm sm:text-base">Temukan kesegaran berbagai racikan boba, kopi, mocktail, dan teh segar berkualitas tinggi.</p>
+                </div>
+
+                <!-- Search & Category Filters -->
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 glass-card p-4 rounded-2xl">
+                    <!-- Search Input -->
+                    <div class="relative w-full md:w-72">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input type="text" id="searchInput" placeholder="Cari minuman..." 
+                               class="w-full bg-slate-900 border border-slate-700 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-electric transition-colors">
+                    </div>
+
+                    <!-- Category Buttons -->
+                    <div class="flex flex-wrap items-center justify-center gap-2 w-full md:w-auto" id="categoryContainer">
+                        <button class="cat-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-brand-blue text-white" data-category="all">Semua</button>
+                        <button class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-slate-900 text-slate-300 hover:bg-slate-800" data-category="boba">Boba & Milk Tea</button>
+                        <button class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-slate-900 text-slate-300 hover:bg-slate-800" data-category="coffee">Coffee Series</button>
+                        <button class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-slate-900 text-slate-300 hover:bg-slate-800" data-category="fresh">Fresh Mocktails</button>
+                    </div>
+                </div>
+
+                <!-- Menu Cards Grid -->
+                <div id="menuGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Menu Items dynamically rendered via Javascript -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 3: ALAMAT LOKASI TOKO -->
+        <section id="alamat" class="py-20 px-4 relative">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="text-center space-y-3 max-w-2xl mx-auto">
+                    <span class="text-brand-electric text-sm font-bold uppercase tracking-widest">Lokasi Kami</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Kunjungi Outlet BlueWave</h2>
+                    <p class="text-slate-400 text-sm sm:text-base">Nikmati minuman secara langsung di tempat yang nyaman atau dapatkan pesanan melalui layanan take-away.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+                    
+                    <!-- Address Info Card -->
+                    <div class="glass-card p-6 sm:p-8 rounded-3xl space-y-6 flex flex-col justify-between border border-blue-500/20">
+                        <div class="space-y-6">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 rounded-2xl bg-brand-blue/20 text-brand-electric flex items-center justify-center text-xl">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-white">Alamat Utama</h3>
+                                    <p class="text-xs text-slate-400">Pusat Kota & Strategis</p>
+                                </div>
+                            </div>
+
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Jl. Pendidikan No. 45, Area Kampus SMK TKJ, Kota Banten, Indonesia 15411.
+                            </p>
+
+                            <hr class="border-slate-800">
+
+                            <!-- Opening Hours -->
+                            <div class="space-y-3">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-brand-electric">Jam Operasional Toko</h4>
+                                <ul class="space-y-2 text-xs sm:text-sm">
+                                    <li class="flex justify-between text-slate-300">
+                                        <span>Senin - Jumat:</span>
+                                        <span class="font-semibold text-white">09:00 - 21:00 WIB</span>
+                                    </li>
+                                    <li class="flex justify-between text-slate-300">
+                                        <span>Sabtu - Minggu:</span>
+                                        <span class="font-semibold text-white">10:00 - 22:00 WIB</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <hr class="border-slate-800">
+
+                            <!-- Delivery Note -->
+                            <div class="flex items-start space-x-3 text-xs text-slate-400">
+                                <i class="fa-solid fa-truck-fast text-brand-electric text-base mt-0.5"></i>
+                                <span>Melayani pesan antar area sekitar kampus dan pengiriman via kurir online.</span>
+                            </div>
+                        </div>
+
+                        <a href="https://maps.google.com" target="_blank" class="w-full py-3 rounded-xl bg-slate-900 hover:bg-brand-blue text-white text-center text-xs font-bold transition-all border border-slate-700 flex items-center justify-center space-x-2">
+                            <span>Buka Google Maps</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+
+                    <!-- Embedded Interactive Map Placeholder / Styled Container -->
+                    <div class="lg:col-span-2 glass-card rounded-3xl overflow-hidden min-h-[350px] relative border border-blue-500/20">
+                        <iframe 
+                            class="w-full h-full min-h-[350px] rounded-3xl filter contrast-125 grayscale invert opacity-80"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126920.2917726456!2d106.759478!3d-6.229728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e800000001%3A0x1000000000000000!2sJakarta!5e0!3m2!1sid!2sid!4v1680000000000!5m2!1sid!2sid" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                        <!-- Map Overlay Label -->
+                        <div class="absolute bottom-4 left-4 glass-card px-4 py-2 rounded-xl text-xs font-semibold text-white flex items-center space-x-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span>Outlet BlueWave Siap Melayani</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 4: KONTAK TOKO -->
+        <section id="kontak" class="py-20 px-4 bg-brand-darkblue/50 relative">
+            <div class="max-w-7xl mx-auto space-y-12">
+                
+                <div class="text-center space-y-3 max-w-2xl mx-auto">
+                    <span class="text-brand-electric text-sm font-bold uppercase tracking-widest">Informasi Kontak</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Hubungi BlueWave Drinks</h2>
+                    <p class="text-slate-400 text-sm sm:text-base">Punya pertanyaan, kritik, saran, atau pemesanan khusus? Tim kami siap membantu Anda.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Direct Contact Channels -->
+                    <div class="space-y-4">
+                        
+                        <!-- WhatsApp -->
+                        <div class="glass-card p-5 rounded-2xl flex items-center space-x-4 border border-emerald-500/20 hover:border-emerald-500/50 transition-all">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-medium">WhatsApp Admin</p>
+                                <a href="https://wa.me/6285717421807" target="_blank" class="text-base font-bold text-white hover:text-emerald-400 transition-colors">+62 857-1742-1807</a>
+                            </div>
+                        </div>
+
+                        <!-- Instagram -->
+                        <div class="glass-card p-5 rounded-2xl flex items-center space-x-4 border border-pink-500/20 hover:border-pink-500/50 transition-all">
+                            <div class="w-12 h-12 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center text-2xl">
+                                <i class="fa-brands fa-instagram"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-medium">Instagram Resmi</p>
+                                <a href="https://instagram.com" target="_blank" class="text-base font-bold text-white hover:text-pink-400 transition-colors">@bluewave.drinks</a>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="glass-card p-5 rounded-2xl flex items-center space-x-4 border border-blue-500/20 hover:border-blue-500/50 transition-all">
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/20 text-brand-electric flex items-center justify-center text-2xl">
+                                <i class="fa-regular fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-medium">Email Support</p>
+                                <a href="mailto:info@bluewave.com" class="text-base font-bold text-white hover:text-brand-electric transition-colors">kontak@bluewave.id</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="lg:col-span-2 glass-card p-6 sm:p-8 rounded-3xl border border-blue-500/20">
+                        <form id="contactForm" class="space-y-4">
+                            <h3 class="text-xl font-bold text-white mb-2">Kirim Pesan Langsung</h3>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Lengkap</label>
+                                    <input type="text" id="contactName" required placeholder="Masukkan nama Anda" 
+                                           class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-electric">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-300 mb-1">Nomor WhatsApp</label>
+                                    <input type="tel" id="contactPhone" required placeholder="0812xxxxxxx" 
+                                           class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-electric">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Subjek</label>
+                                <input type="text" id="contactSubject" required placeholder="Contoh: Pemesanan Acara / Pertanyaan" 
+                                       class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-electric">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Pesan / Saran</label>
+                                <textarea id="contactMessage" rows="4" required placeholder="Tuliskan pesan Anda di sini..." 
+                                          class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-electric resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-blue hover:bg-blue-600 text-white font-bold text-sm shadow-lg shadow-blue-500/20 transition-all flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>Kirim Pesan Sekarang</span>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- SHOPPING CART SLIDE-OVER DRAWER -->
+    <div id="cartModal" class="fixed inset-0 z-50 overflow-hidden hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+        <!-- Backdrop -->
+        <div id="cartBackdrop" class="fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity"></div>
+
+        <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex">
+            <div class="w-screen max-w-md bg-brand-darkblue border-l border-blue-500/20 text-white shadow-2xl flex flex-col justify-between">
+                
+                <!-- Cart Header -->
+                <div class="p-6 border-b border-slate-800 flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-basket-shopping text-brand-electric text-xl"></i>
+                        <h2 class="text-lg font-bold">Keranjang Belanja</h2>
+                    </div>
+                    <button id="closeCartBtn" class="text-slate-400 hover:text-white p-2 focus:outline-none">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Cart List -->
+                <div id="cartItemsList" class="flex-grow p-6 overflow-y-auto space-y-4 divide-y divide-slate-800/60">
+                    <!-- Items rendered dynamically -->
+                    <div id="emptyCartMsg" class="text-center py-12 space-y-3">
+                        <i class="fa-solid fa-glass-water-droplet text-5xl text-slate-700"></i>
+                        <p class="text-slate-400 text-sm">Keranjang Anda masih kosong.</p>
+                        <a href="#menu" id="shopNowBtn" class="inline-block text-xs font-bold text-brand-electric hover:underline">Pilih Minuman Sekarang &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Cart Footer / Total & WhatsApp Order -->
+                <div class="p-6 border-t border-slate-800 bg-slate-950 space-y-4">
+                    <div class="space-y-1.5">
+                        <div class="flex justify-between text-xs text-slate-400">
+                            <span>Total Item:</span>
+                            <span id="totalItemsCount">0 pcs</span>
+                        </div>
+                        <div class="flex justify-between text-base font-bold text-white">
+                            <span>Total Bayar:</span>
+                            <span id="totalPrice" class="text-brand-electric">Rp 0</span>
+                        </div>
+                    </div>
+
+                    <button id="checkoutBtn" disabled class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-800 disabled:text-slate-500 text-white font-bold text-sm shadow-lg shadow-emerald-600/20 transition-all flex items-center justify-center space-x-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Pesan via WhatsApp</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION CONTAINER -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="glass-card px-5 py-3.5 rounded-2xl border border-brand-electric/40 text-white flex items-center space-x-3 shadow-2xl">
+            <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+            <span id="toastMsg" class="text-xs font-semibold">Notifikasi</span>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-black border-t border-slate-800 py-8 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+            <div>
+                <p class="text-sm font-bold text-white">BlueWave Drinks &copy; 2026</p>
+                <p class="text-xs text-slate-500">Proyek Website Praktik Siswa SMK TKJ (Teknik Komputer & Jaringan)</p>
+            </div>
+            <div class="flex items-center space-x-4 text-slate-400 text-xs">
+                <span>Warna: Biru • Hitam • Putih</span>
+                <span>•</span>
+                <a href="#beranda" class="hover:text-brand-electric transition-colors">Kembali ke Atas &uarr;</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // MENU DATA CATALOG
+        const menuProducts = [
+            {
+                id: 1,
+                name: "Blue Ocean Wave Mocktail",
+                category: "fresh",
+                price: 18000,
+                rating: "4.9",
+                image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80",
+                desc: "Perpaduan rasa sirup Blue Curaçao, soda dingin, dan perasan jeruk nipis segar."
+            },
+            {
+                id: 2,
+                name: "Signature Blue Boba Milk Tea",
+                category: "boba",
+                price: 22000,
+                rating: "4.8",
+                image: "https://images.unsplash.com/photo-1558857563-b371033873b8?auto=format&fit=crop&w=500&q=80",
+                desc: "Susu segar dipadu ekstrak bunga telang alami dengan boba kenyal rasa gula aren."
+            },
+            {
+                id: 3,
+                name: "Iced Blue Espresso Latte",
+                category: "coffee",
+                price: 20000,
+                rating: "4.9",
+                image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=500&q=80",
+                desc: "Espresso arabika ganda dengan lapisan susu cream telang bertingkat yang artistik."
+            },
+            {
+                id: 4,
+                name: "Electric Blueberry Ice Cream Shake",
+                category: "fresh",
+                price: 24000,
+                rating: "5.0",
+                image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=500&q=80",
+                desc: "Smoothie buah blueberry asli ditaburi krim vanila halus dan topping keju."
+            },
+            {
+                id: 5,
+                name: "Brown Sugar Pearl Milk Tea",
+                category: "boba",
+                price: 20000,
+                rating: "4.7",
+                image: "https://images.unsplash.com/photo-1541658016709-82535e94bc69?auto=format&fit=crop&w=500&q=80",
+                desc: "Boba gula aren klasik melimpah dipadukan dengan susu segar premium dan es."
+            },
+            {
+                id: 6,
+                name: "Americano Cold Brew Chill",
+                category: "coffee",
+                price: 16000,
+                rating: "4.6",
+                image: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=500&q=80",
+                desc: "Kopi dingin ekstrak 12 jam dengan cita rasa kuat dan kesegaran maksimal."
+            },
+            {
+                id: 7,
+                name: "Tropical Citrus Sparkling",
+                category: "fresh",
+                price: 17000,
+                rating: "4.8",
+                image: "https://images.unsplash.com/photo-1621263764928-df1444c5e859?auto=format&fit=crop&w=500&q=80",
+                desc: "Kombinasi lemon, mint segar, dan soda bercita rasa tropis penyegar dahaga."
+            },
+            {
+                id: 8,
+                name: "Matcha Cream Cheese Boba",
+                category: "boba",
+                price: 23000,
+                rating: "4.9",
+                image: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=500&q=80",
+                desc: "Matcha impor Jepang dipadu boba dan topping krim keju asin gurih."
+            }
+        ];
+
+        // CART STATE
+        let cart = [];
+
+        // DOM ELEMENTS
+        const menuGrid = document.getElementById('menuGrid');
+        const searchInput = document.getElementById('searchInput');
+        const categoryBtns = document.querySelectorAll('.cat-btn');
+        const cartBtn = document.getElementById('cartBtn');
+        const cartBadge = document.getElementById('cartBadge');
+        const cartModal = document.getElementById('cartModal');
+        const cartBackdrop = document.getElementById('cartBackdrop');
+        const closeCartBtn = document.getElementById('closeCartBtn');
+        const cartItemsList = document.getElementById('cartItemsList');
+        const emptyCartMsg = document.getElementById('emptyCartMsg');
+        const totalPriceEl = document.getElementById('totalPrice');
+        const totalItemsCountEl = document.getElementById('totalItemsCount');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const contactForm = document.getElementById('contactForm');
+        const shopNowBtn = document.getElementById('shopNowBtn');
+
+        // FORMAT CURRENCY
+        function formatRupiah(number) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(number);
+        }
+
+        // RENDER MENU ITEMS
+        function renderMenu(items) {
+            menuGrid.innerHTML = '';
+            
+            if (items.length === 0) {
+                menuGrid.innerHTML = `
+                    <div class="col-span-full text-center py-12 text-slate-400 space-y-2">
+                        <i class="fa-solid fa-magnifying-glass text-4xl text-slate-600"></i>
+                        <p class="text-sm">Minuman tidak ditemukan. Coba kata kunci lain.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            items.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'glass-card rounded-2xl overflow-hidden hover:border-brand-electric/50 transition-all duration-300 flex flex-col justify-between group';
+                
+                card.innerHTML = `
+                    <div>
+                        <!-- Product Image -->
+                        <div class="relative h-48 w-full overflow-hidden">
+                            <img src="${product.image}" alt="${product.name}" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                 onerror="this.src='https://placehold.co/400x300/0f172a/38bdf8?text=${encodeURIComponent(product.name)}'">
+                            
+                            <div class="absolute top-3 right-3 bg-brand-black/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-xs font-bold text-amber-400 flex items-center space-x-1 border border-amber-500/20">
+                                <i class="fa-solid fa-star text-xs"></i>
+                                <span>${product.rating}</span>
+                            </div>
+                        </div>
+
+                        <!-- Product Content -->
+                        <div class="p-5 space-y-2">
+                            <h3 class="text-base font-bold text-white group-hover:text-brand-electric transition-colors leading-snug">${product.name}</h3>
+                            <p class="text-xs text-slate-400 line-clamp-2">${product.desc}</p>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer: Price & Add Button -->
+                    <div class="p-5 pt-0 flex items-center justify-between border-t border-slate-800/50 mt-2">
+                        <div>
+                            <span class="text-[10px] text-slate-400 block uppercase font-semibold">Harga</span>
+                            <span class="text-sm sm:text-base font-extrabold text-brand-electric">${formatRupiah(product.price)}</span>
+                        </div>
+
+                        <button onclick="addToCart(${product.id})" class="px-3.5 py-2 rounded-xl bg-brand-blue hover:bg-blue-600 text-white text-xs font-bold transition-all flex items-center space-x-1.5 shadow-md shadow-blue-500/20">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Tambah</span>
+                        </button>
+                    </div>
+                `;
+                menuGrid.appendChild(card);
+            });
+        }
+
+        // FILTER LOGIC
+        function filterMenu() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeCategory = document.querySelector('.cat-btn.active').dataset.category;
+
+            const filtered = menuProducts.filter(product => {
+                const matchesSearch = product.name.toLowerCase().includes(searchTerm) || product.desc.toLowerCase().includes(searchTerm);
+                const matchesCategory = activeCategory === 'all' || product.category === activeCategory;
+                return matchesSearch && matchesCategory;
+            });
+
+            renderMenu(filtered);
+        }
+
+        // CATEGORY CLICK EVENT
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-brand-blue', 'text-white');
+                    b.classList.add('bg-slate-900', 'text-slate-300');
+                });
+                btn.classList.add('active', 'bg-brand-blue', 'text-white');
+                btn.classList.remove('bg-slate-900', 'text-slate-300');
+                filterMenu();
+            });
+        });
+
+        // SEARCH EVENT
+        searchInput.addEventListener('input', filterMenu);
+
+        // CART FUNCTIONS
+        window.addToCart = function(productId) {
+            const product = menuProducts.find(p => p.id === productId);
+            if (!product) return;
+
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+
+            updateCartUI();
+            showToast(`"${product.name}" ditambahkan ke keranjang!`);
+        };
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+        }
+
+        function updateQuantity(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+
+            item.qty += delta;
+            if (item.qty <= 0) {
+                removeFromCart(productId);
+            } else {
+                updateCartUI();
+            }
+        }
+
+        function updateCartUI() {
+            // Update Badge
+            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            cartBadge.textContent = totalCount;
+            if (totalCount > 0) {
+                cartBadge.classList.remove('scale-0');
+            } else {
+                cartBadge.classList.add('scale-0');
+            }
+
+            totalItemsCountEl.textContent = `${totalCount} pcs`;
+
+            // Update Items List
+            if (cart.length === 0) {
+                emptyCartMsg.classList.remove('hidden');
+                // Remove dynamic item elements
+                const dynamicItems = cartItemsList.querySelectorAll('.cart-item-row');
+                dynamicItems.forEach(el => el.remove());
+                totalPriceEl.textContent = 'Rp 0';
+                checkoutBtn.disabled = true;
+                return;
+            }
+
+            emptyCartMsg.classList.add('hidden');
+            
+            // Remove previous rows
+            const dynamicItems = cartItemsList.querySelectorAll('.cart-item-row');
+            dynamicItems.forEach(el => el.remove());
+
+            let grandTotal = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.qty;
+                grandTotal += itemTotal;
+
+                const itemRow = document.createElement('div');
+                itemRow.className = 'cart-item-row pt-4 flex items-center justify-between gap-3';
+                itemRow.innerHTML = `
+                    <div class="flex items-center space-x-3 overflow-hidden">
+                        <img src="${item.image}" alt="${item.name}" class="w-12 h-12 rounded-xl object-cover flex-shrink-0">
+                        <div class="min-w-0">
+                            <h4 class="text-xs font-bold text-white truncate">${item.name}</h4>
+                            <p class="text-[10px] text-brand-electric font-semibold">${formatRupiah(item.price)}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-2 flex-shrink-0">
+                        <div class="flex items-center bg-slate-900 border border-slate-700 rounded-lg">
+                            <button onclick="updateQuantity(${item.id}, -1)" class="px-2 py-1 text-xs text-slate-300 hover:text-white">-</button>
+                            <span class="px-2 text-xs font-bold text-white">${item.qty}</span>
+                            <button onclick="updateQuantity(${item.id}, 1)" class="px-2 py-1 text-xs text-slate-300 hover:text-white">+</button>
+                        </div>
+                        <button onclick="removeFromCart(${item.id})" class="text-slate-500 hover:text-red-400 p-1 text-xs">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                `;
+                cartItemsList.appendChild(itemRow);
+            });
+
+            totalPriceEl.textContent = formatRupiah(grandTotal);
+            checkoutBtn.disabled = false;
+        }
+
+        // TOGGLE CART MODAL
+        function openCart() {
+            cartModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeCart() {
+            cartModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        cartBtn.addEventListener('click', openCart);
+        closeCartBtn.addEventListener('click', closeCart);
+        cartBackdrop.addEventListener('click', closeCart);
+        if (shopNowBtn) {
+            shopNowBtn.addEventListener('click', closeCart);
+        }
+
+        // WHATSAPP CHECKOUT LOGIC
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) return;
+
+            let message = "Halo Admin BlueWave Drinks, saya mau pesan minuman:\n\n";
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const sub = item.price * item.qty;
+                total += sub;
+                message += `${index + 1}. ${item.name} x${item.qty} = ${formatRupiah(sub)}\n`;
+            });
+
+            message += `\n*Total Bayar: ${formatRupiah(total)}*`;
+            message += "\n\nMohon konfirmasi pesanan dan alamat pengiriman. Terima kasih!";
+
+            const encodedMsg = encodeURIComponent(message);
+            const waNumber = "6285717421807"; // WhatsApp toko
+            window.open(`https://wa.me/${waNumber}?text=${encodedMsg}`, '_blank');
+        });
+
+        // CONTACT FORM SUBMISSION
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('contactName').value;
+            const phone = document.getElementById('contactPhone').value;
+            const subject = document.getElementById('contactSubject').value;
+            const message = document.getElementById('contactMessage').value;
+
+            const waMsg = `Halo BlueWave, nama saya ${name} (${phone}).\nSubjek: ${subject}\n\nPesan:\n${message}`;
+            window.open(`https://wa.me/6281234567890?text=${encodeURIComponent(waMsg)}`, '_blank');
+
+            contactForm.reset();
+            showToast("Pesan berhasil dibuat! Membuka WhatsApp...");
+        });
+
+        // MOBILE MENU TOGGLE
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // TOAST NOTIFICATION
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.textContent = message;
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // INITIAL RENDER
+        window.addEventListener('DOMContentLoaded', () => {
+            renderMenu(menuProducts);
+        });
+    </script>
+</body>
+</html>
